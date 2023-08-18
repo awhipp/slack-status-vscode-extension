@@ -1,4 +1,4 @@
-# Extension Name: slack-status (WIP)
+# slack-status (WIP)
 
 ## Description
 
