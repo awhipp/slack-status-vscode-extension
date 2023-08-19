@@ -2,10 +2,14 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
+const { WebClient } = require('@slack/web-api');
+
 let charactersWritten: Map<string, number> = new Map();
 let linesWritten: Map<string, number> = new Map();
 let currentDocument: vscode.TextDocument;
 let listeners: Array<vscode.Disposable> = [];
+let client: typeof WebClient = undefined;
+let lastSendTime: Date = new Date();
 
 export function setNewDocument(e: vscode.TextEditor | undefined) {
     /**
@@ -30,6 +34,16 @@ export function setNewDocument(e: vscode.TextEditor | undefined) {
 }
 
 export function setSlackStatus(e: vscode.TextDocumentChangeEvent) {
+    if (e.document && currentDocument === undefined) {
+        currentDocument = e.document;
+        if (!charactersWritten.has(e.document.fileName)) {
+            charactersWritten.set(e.document.fileName, 0);
+        }
+        if (!linesWritten.has(e.document.fileName)) {
+            linesWritten.set(e.document.fileName, 0);
+        }
+    }
+
     if (e.contentChanges && currentDocument !== undefined) {
         console.log(`==============================================`);
         console.log(`Current document: ${currentDocument.fileName}`);
@@ -58,6 +72,25 @@ export function setSlackStatus(e: vscode.TextDocumentChangeEvent) {
             }
             console.log(`Lines written: ${linesWritten.get(currentDocument.fileName)}`);
         }
+        
+        const now = new Date();
+        const timeSinceLastSend = now.getTime() - lastSendTime.getTime();
+        console.log(timeSinceLastSend);
+        if (timeSinceLastSend < 5000) {
+            return;
+        } else {
+            const status = `File: ${currentDocument.fileName} | Lines: ${linesWritten.get(currentDocument.fileName)} | Characters: ${charactersWritten.get(currentDocument.fileName)}`;
+            client.users.profile.set({
+                profile: {
+                    status_text: status,
+                    status_emoji: ':computer:',
+                    status_expiration: 0
+                }
+            }).then((res: any) => {
+                console.log('Response: ', res);
+            }).catch(console.error);
+        }
+        lastSendTime = new Date();
     }
 }
 
@@ -78,6 +111,20 @@ export function activate(context: vscode.ExtensionContext) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "slack-status" is now active!');
 
+    const token: string = 'GET TOKEN FROM https://api.slack.com/apps/';
+    client = new WebClient(token);
+
+    client.users.profile.set({
+        profile: {
+            status_text: 'Coding...',
+            status_emoji: ':computer:',
+            status_expiration: 0
+        }
+    }).then((res: any) => {
+        console.log('Response: ', res);
+    }).catch(console.error);
+
+
     setupListeners();
 }
 
@@ -86,4 +133,13 @@ export function deactivate() {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 	listeners.forEach((listener) => listener.dispose());
 	listeners = [];
+    client.users.profile.set({
+        profile: {
+            status_text: 'Offline',
+            status_emoji: ':zzz:',
+            status_expiration: 0
+        }
+    }).then((res: any) => {
+        console.log('Response: ', res);
+    }).catch(console.error);
 }

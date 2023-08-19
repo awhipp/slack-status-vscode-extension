@@ -10,10 +10,12 @@ The slack-status is a Visual Studio Code (VSCode) extension designed to enhance 
   * Lines per document
   * Characters per document
   * TODO: Time based threshold (ie: last 24 hours)
+  * TODO: Pull from VSCode configuration
 
-* Slack Integration (TODO)
-  * TODO: Seamlessly integrates with your Slack workspace. It allows you to configure the Slack channel or user where you want to share your coding progress.
-  * TODO: Set a threshold for when to send a slack message (ie: every N minutes)
+* Slack Integration
+  * Seamlessly integrates with your Slack workspace. It allows you to configure the Slack channel or user where you want to share your coding progress.
+  * Set a threshold for when to send a slack message (ie: every N minutes)
+    * (TODO) Add a configurable property for this
 
 * Privacy and Security
   * It does not access or store your code or any sensitive information. The extension focuses solely on tracking coding activity to generate meaningful updates.
