@@ -1,5 +1,7 @@
 # slackStatus (WIP)
 
+![image](https://github.com/awhipp/slack-status-vscode-extension/assets/6343174/905a3a44-8fbb-4bf8-adbf-4eb68d77a9c8)
+
 ## Description
 
 The slackStatus is a Visual Studio Code (VSCode) extension designed to enhance your coding workflow by providing real-time monitoring of your coding activity and enabling automatic status updates on Slack. With this extension, you can stay accountable and keep your team informed about your progress without any extra effort.
