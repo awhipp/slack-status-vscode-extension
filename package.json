@@ -1,6 +1,6 @@
 {
-  "name": "slack-status",
-  "displayName": "slack-status",
+  "name": "slackStatus",
+  "displayName": "slackStatus",
   "description": "Integrates with slack to provide a live status of what is being worked on and historical statistics",
   "version": "0.0.1",
   "engines": {
@@ -13,7 +13,46 @@
     "onStartupFinished"
   ],
   "main": "./dist/extension.js",
-  "contributes": {},
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Slack Status",
+      "properties": {
+        "slackStatus.slackToken": {
+          "type": "string",
+          "default": "",
+          "description": "The slack token to use for the slack api. You can get this from https://api.slack.com/apps/"
+        },
+        "slackStatus.enableFileType": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to display what type of file you are editing."
+        },
+        "slackStatus.enableLineLocation": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to display what line you are at."
+        },
+        "slackStatus.enableTotalLines": {
+          "type": "boolean",
+          "default": true,
+          "description": "If showing line location, also show total number of lines."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "slackStatus.enable",
+        "title": "Enable Slack Status in the current workspace",
+        "category": "Slack Status"
+      },
+      {
+        "command": "slackStatus.disable",
+        "title": "Disable Slack Status in the current workspace",
+        "category": "Slack Status"
+      }
+    ]
+  },
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "webpack",
