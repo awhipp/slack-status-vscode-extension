@@ -1,8 +1,8 @@
-# slack-status (WIP)
+# slackStatus (WIP)
 
 ## Description
 
-The slack-status is a Visual Studio Code (VSCode) extension designed to enhance your coding workflow by providing real-time monitoring of your coding activity and enabling automatic status updates on Slack. With this extension, you can stay accountable and keep your team informed about your progress without any extra effort.
+The slackStatus is a Visual Studio Code (VSCode) extension designed to enhance your coding workflow by providing real-time monitoring of your coding activity and enabling automatic status updates on Slack. With this extension, you can stay accountable and keep your team informed about your progress without any extra effort.
 
 ### Key Features (WIP)
 
@@ -27,7 +27,7 @@ The slack-status is a Visual Studio Code (VSCode) extension designed to enhance 
 
 #### Install the Extension (Not available yet)
 
-Search for "slack-status" in the VSCode extension marketplace and install it.
+Search for "slackStatus" in the VSCode extension marketplace and install it.
 
 #### Configure Slack Settings
 
@@ -39,8 +39,27 @@ Customize your coding thresholds to suit your coding style and pace.
 
 #### Start Coding
 
-As you write or modify code in VSCode, slack-status will monitor your activity in the background.
+As you write or modify code in VSCode, slackStatus will monitor your activity in the background.
 
 #### Automated Updates
 
-When you cross the set threshold, slack-status will automatically send a status update to Slack, keeping your team informed about your progress.
+When you cross the set threshold, slackStatus will automatically send a status update to Slack, keeping your team informed about your progress.
+
+### How to Develop
+
+```bash
+# Clone the repository
+git clone <git-repository>
+```
+
+```bash
+# Open in VSCode
+code slackStatus
+```
+
+```bash
+# Install dependencies
+npm install
+```
+
+F5 builds the application and runs it in another VSCode application
