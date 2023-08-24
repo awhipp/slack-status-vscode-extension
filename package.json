@@ -13,7 +13,29 @@
     "onStartupFinished"
   ],
   "main": "./dist/extension.js",
-  "contributes": {},
+  "contributes": {
+    "configuration": {
+        "type": "object",
+        "title": "Slack Status",
+        "properties": {
+            "slack-status.slackToken": {
+                "type": "string",
+                "default": "",
+                "description": "The slack token to use for the slack api. You can get this from https://api.slack.com/apps/"
+            },
+            "slack-status.enableCharacterCount": {
+                "type": "boolean",
+                "default": true,
+                "description": "Whether to enable the character count"
+            },
+            "slack-status.enableLineCount": {
+                "type": "boolean",
+                "default": true,
+                "description": "Whether to enable the line count"
+            }
+        }
+    }
+  },
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "webpack",
