@@ -81,6 +81,6 @@
     "webpack-cli": "^5.1.1"
   },
   "dependencies": {
-    "@slack/web-api": "^6.9.0"
+    "@slack/web-api": "^6.9.1"
   }
 }
